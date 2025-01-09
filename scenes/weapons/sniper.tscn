@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxt7ra5x1j7j5"]
+
+[ext_resource type="PackedScene" uid="uid://baam70oiqilp1" path="res://assets/models/weapons/sniper_model.glb" id="1_t50vf"]
+[ext_resource type="Script" path="res://scripts/weapons/sniper.gd" id="2_qighs"]
+
+[node name="Sniper" instance=ExtResource("1_t50vf")]
+script = ExtResource("2_qighs")

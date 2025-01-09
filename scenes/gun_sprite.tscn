@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://qgvbjcp6v7ul"]
+
+[ext_resource type="Texture2D" uid="uid://jpt0jq4aljjd" path="res://assets/models/weapons/weapon.png" id="1_ccrwo"]
+
+[node name="GunSprite" type="Sprite3D"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.030209, -0.313909, -0.764496)
+texture = ExtResource("1_ccrwo")
+region_enabled = true
+region_rect = Rect2(23.9474, 20.4474, 332.868, 195.553)

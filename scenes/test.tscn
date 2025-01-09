@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://5p0p6ygodhtu"]
+
+[ext_resource type="Material" uid="uid://l4fbkg5jukc6" path="res://assets/environment/prototype/materials/floor.tres" id="1_sar4d"]
+[ext_resource type="PackedScene" uid="uid://drb600rubyjf6" path="res://scenes/player.tscn" id="3_12kxn"]
+[ext_resource type="PackedScene" uid="uid://ch07gx0ie5as5" path="res://scenes/game.tscn" id="4_h7u3t"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ftp6k"]
+
+[sub_resource type="Sky" id="Sky_sj112"]
+sky_material = SubResource("ProceduralSkyMaterial_ftp6k")
+
+[sub_resource type="Environment" id="Environment_rb38u"]
+background_mode = 2
+sky = SubResource("Sky_sj112")
+
+[node name="Test" type="Node3D"]
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Geometry" type="CSGCombiner3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00221062, 0.010514, 0.0108552)
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Environment/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.13538, 0.358643, -0.769447)
+size = Vector3(20, 2, 20)
+material = ExtResource("1_sar4d")
+
+[node name="Subtraction" type="CSGBox3D" parent="Environment/Geometry/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.401363, 0.50545, 0.126511)
+operation = 2
+size = Vector3(19, 1, 19)
+material = ExtResource("1_sar4d")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_rb38u")
+
+[node name="Lights" type="Node3D" parent="Environment"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment/Lights"]
+transform = Transform3D(0.563612, -0.45752, 0.687762, -0.526023, 0.44317, 0.725879, -0.6369, -0.770892, 0.00910997, 0, 5.61667, 0)
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Environment/Lights"]
+transform = Transform3D(0.458957, -0.388626, -0.798954, 0.619448, -0.504673, 0.601323, -0.6369, -0.770892, 0.00911003, 0, 5.61667, 0)
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="Environment/Lights"]
+transform = Transform3D(-0.732557, -0.646963, 0.211661, 0.619448, -0.504673, 0.601323, -0.282214, 0.571616, 0.770462, 0, 5.61667, 0)
+
+[node name="DirectionalLight3D4" type="DirectionalLight3D" parent="Environment/Lights"]
+transform = Transform3D(0.63794, 0.770009, -0.010923, 0.619448, -0.504673, 0.601323, 0.457511, -0.390374, -0.798932, -0.775135, 5.61667, 0)
+
+[node name="Player" parent="." instance=ExtResource("3_12kxn")]
+
+[node name="Game" parent="." instance=ExtResource("4_h7u3t")]

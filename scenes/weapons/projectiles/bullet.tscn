@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbjxx2uatajhb"]
+
+[ext_resource type="Script" path="res://scripts/weapons/projectiles/bullet.gd" id="1_sec1d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1mtwg"]
+albedo_color = Color(1, 0.480496, 0.325001, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hk7g7"]
+material = SubResource("StandardMaterial3D_1mtwg")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_f0lbn"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_sec1d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("SphereMesh_hk7g7")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("SphereShape3D_f0lbn")

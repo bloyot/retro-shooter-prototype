@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://caaxinbb0lrvg"]
+
+[ext_resource type="PackedScene" uid="uid://coxi4etampfpp" path="res://assets/models/weapons/machine_gun_model.glb" id="1_d3p40"]
+[ext_resource type="Script" path="res://scripts/weapons/machine_gun.gd" id="2_3yqo0"]
+
+[node name="MachineGun" instance=ExtResource("1_d3p40")]
+script = ExtResource("2_3yqo0")
