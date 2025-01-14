@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody3D
 
 const SPEED = 10.0
@@ -5,7 +6,7 @@ const DECELERATION = 0.5
 const JUMP_VELOCITY = 7
 const MOUSE_SENSITIVITY = .1
 
-@onready var camera := $Camera
+@onready var camera: Camera3D = $Camera
 @onready var projectiles_container := get_tree().current_scene.get_node("Game/ProjectilesContainer")	
 @onready var projectile_origin := $Camera/ProjectileOrigin
 @onready var shoot_cooldown_timer := $ShootCooldown
@@ -14,7 +15,7 @@ const MOUSE_SENSITIVITY = .1
 var shoot_cooldown := false
 
 func _ready() -> void:
-	shoot_cooldown_timer.timeout.connect(on_shoot_cooldown_timer)
+	shoot_cooldown_timer.timeout.connect(on_shoot_cooldown_timer)	
 
 func _physics_process(delta: float) -> void:
 	handle_movement(delta)
@@ -51,7 +52,7 @@ func handle_weapon_swap() -> void:
 	if Input.is_action_just_pressed("next_weapon"):
 		weapon_manager.next_weapon()
 	if Input.is_action_just_pressed("prev_weapon"):
-		weapon_manager.prev_weapon()
+		weapon_manager.prev_weapon()	
 
 #### event callbacks #####
 func on_shoot_cooldown_timer() -> void:

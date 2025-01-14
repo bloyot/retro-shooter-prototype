@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://5p0p6ygodhtu"]
+[gd_scene load_steps=8 format=3 uid="uid://5p0p6ygodhtu"]
 
 [ext_resource type="Material" uid="uid://l4fbkg5jukc6" path="res://assets/environment/prototype/materials/floor.tres" id="1_sar4d"]
+[ext_resource type="PackedScene" uid="uid://claf33kb5p7n2" path="res://scenes/target.tscn" id="2_1e3dj"]
 [ext_resource type="PackedScene" uid="uid://drb600rubyjf6" path="res://scenes/player.tscn" id="3_12kxn"]
 [ext_resource type="PackedScene" uid="uid://ch07gx0ie5as5" path="res://scenes/game.tscn" id="4_h7u3t"]
 
@@ -48,6 +49,20 @@ transform = Transform3D(-0.732557, -0.646963, 0.211661, 0.619448, -0.504673, 0.6
 
 [node name="DirectionalLight3D4" type="DirectionalLight3D" parent="Environment/Lights"]
 transform = Transform3D(0.63794, 0.770009, -0.010923, 0.619448, -0.504673, 0.601323, 0.457511, -0.390374, -0.798932, -0.775135, 5.61667, 0)
+
+[node name="Targets" type="Node3D" parent="Environment"]
+
+[node name="Target3" parent="Environment/Targets" instance=ExtResource("2_1e3dj")]
+transform = Transform3D(-0.731913, -0.681398, -8.74228e-08, -0.681398, 0.731913, 0, 6.39859e-08, 5.95697e-08, -1, 4.44862, 4.58703, -1.45377)
+
+[node name="Target4" parent="Environment/Targets" instance=ExtResource("2_1e3dj")]
+transform = Transform3D(0.765044, 0.642603, 0.0420589, -0.643124, 0.765761, -0.00148343, -0.0331603, -0.0259142, 0.999114, -8.74005, 7.52656, -1.45377)
+
+[node name="Target" parent="Environment/Targets" instance=ExtResource("2_1e3dj")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.99395e-07, 1.38622, -5.5606)
+
+[node name="Target2" parent="Environment/Targets" instance=ExtResource("2_1e3dj")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.36912e-07, 1.38622, 4.44862)
 
 [node name="Player" parent="." instance=ExtResource("3_12kxn")]
 

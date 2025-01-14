@@ -1,20 +1,17 @@
 extends Node3D
 
-@onready var machine_gun := $MachineGun
-@onready var rocket := $Rocket
-@onready var sniper := $Sniper
-
 @export var projectile_origin: Marker3D
-@export var weapons: Array[Weapon]
+
+var weapons: Array
 var active_weapon_index := 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:		
+	weapons = find_children("*", "Weapon")
 	assert(projectile_origin != null, "Projectile Origin Not set for weapon manager!")
 	for weapon in weapons:
 		weapon.visible = false
-		if weapon is ProjectileWeapon:
-			weapon.projectile_origin = projectile_origin
+		weapon.init(projectile_origin)
 	swap_weapon(active_weapon_index)
 
 func swap_weapon(weapon_index: int) -> void:		

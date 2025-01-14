@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmw5t0uk7twca"]
+
+[ext_resource type="PackedScene" uid="uid://di3hvsi6ogvql" path="res://assets/models/weapons/rocket_model.glb" id="1_bffgx"]
+[ext_resource type="Script" path="res://scripts/weapons/weapon.gd" id="2_hha6o"]
+[ext_resource type="Resource" uid="uid://64umhhs0cypp" path="res://scripts/weapons/resources/rocket_launcher.tres" id="3_ccenv"]
+
+[node name="RocketLauncher" groups=["player"] instance=ExtResource("1_bffgx")]
+script = ExtResource("2_hha6o")
+weapon_resource = ExtResource("3_ccenv")

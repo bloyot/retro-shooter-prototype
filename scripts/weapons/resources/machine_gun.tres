@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=3 format=3 uid="uid://df85h3tod2nio"]
+
+[ext_resource type="Script" path="res://scripts/weapons/weapon_resource.gd" id="1_4dban"]
+[ext_resource type="PackedScene" uid="uid://bbjxx2uatajhb" path="res://scenes/weapons/projectiles/bullet.tscn" id="1_rk1nn"]
+
+[resource]
+script = ExtResource("1_4dban")
+type = "Hitscan"
+cooldown_s = 0.15
+range = 2000.0
+projectile_speed = 0.0
+projectile_scene = ExtResource("1_rk1nn")
+projectile_duration_s = 0.0

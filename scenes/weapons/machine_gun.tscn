@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://caaxinbb0lrvg"]
+[gd_scene load_steps=4 format=3 uid="uid://caaxinbb0lrvg"]
 
 [ext_resource type="PackedScene" uid="uid://coxi4etampfpp" path="res://assets/models/weapons/machine_gun_model.glb" id="1_d3p40"]
-[ext_resource type="Script" path="res://scripts/weapons/machine_gun.gd" id="2_3yqo0"]
+[ext_resource type="Script" path="res://scripts/weapons/weapon.gd" id="2_00dsu"]
+[ext_resource type="Resource" uid="uid://df85h3tod2nio" path="res://scripts/weapons/resources/machine_gun.tres" id="3_sj3m5"]
 
-[node name="MachineGun" instance=ExtResource("1_d3p40")]
-script = ExtResource("2_3yqo0")
+[node name="MachineGun" groups=["player"] instance=ExtResource("1_d3p40")]
+script = ExtResource("2_00dsu")
+weapon_resource = ExtResource("3_sj3m5")
