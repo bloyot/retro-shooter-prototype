@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbmlaedr0ikxk"
-path.s3tc="res://.godot/imported/PAVEMENT.png-41ba8fbf68088ecf8fe57b37ac48cb28.s3tc.ctex"
+uid="uid://buel4gkqsebpm"
+path.s3tc="res://.godot/imported/walk_ne.png-9a5b54b58e35f9cd845e20c25e4dd57c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/environment/retro_fps/textures/Urban/PAVEMENT.png"
-dest_files=["res://.godot/imported/PAVEMENT.png-41ba8fbf68088ecf8fe57b37ac48cb28.s3tc.ctex"]
+source_file="res://assets/sprites/scifi_soldier/walk/walk_ne.png"
+dest_files=["res://.godot/imported/walk_ne.png-9a5b54b58e35f9cd845e20c25e4dd57c.s3tc.ctex"]
 
 [params]
 

@@ -36,4 +36,4 @@ grow_vertical = 2
 layout_mode = 2
 texture = ExtResource("2_uww38")
 
-[node name="ShootCooldown" type="Timer" parent="."]
+[node name="ShootCooldown" type="Timer" parent="." groups=["player"]]

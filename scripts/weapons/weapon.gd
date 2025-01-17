@@ -1,6 +1,7 @@
 class_name Weapon
 extends Node3D
 
+const hit_decal: PackedScene = preload("res://scenes/weapons/hit_decal.tscn")
 const ray_range = 2000
 
 @export var weapon_resource: WeaponResource
@@ -22,8 +23,8 @@ func get_weapon_cooldown_s() -> float:
 
 func raycast_fire(raycast_result: Array) -> void:
 	var collider = raycast_result[0]
-	if collider != null and "enemy" in collider.get_parent().get_groups():
-		collider.get_parent().on_hit(null)
+	if collider != null:		
+		spawn_decal(raycast_result[1], raycast_result[2])
 
 func projectile_fire(raycast_result: Array) -> void:	
 	Projectile.new_projectile(
@@ -48,3 +49,8 @@ func camera_raycast() -> Array:
 		return [intersection.collider, intersection.position, intersection.normal]
 	else:
 		return [null, ray_end, null]
+		
+func spawn_decal(position: Vector3, normal: Vector3) -> void:
+	var decal = hit_decal.instantiate()
+	get_tree().get_root().add_child(decal)
+	decal.global_translate(position+(normal*.01))

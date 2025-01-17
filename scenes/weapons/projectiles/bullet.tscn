@@ -12,6 +12,8 @@ material = SubResource("StandardMaterial3D_1mtwg")
 
 [node name="RigidBody3D" type="RigidBody3D"]
 continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_hweio")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

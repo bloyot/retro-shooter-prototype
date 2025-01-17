@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgewo8frwosi"]
+
+[ext_resource type="Texture2D" uid="uid://bbmlaedr0ikxk" path="res://assets/environment/retro_fps/textures/Urban/PAVEMENT.png" id="1_ps2fa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7rvo2"]
+albedo_texture = ExtResource("1_ps2fa")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[node name="ArtTest" type="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0011282, 0, -0.00818157)
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0701181, -0.181379, -0.256088)
+size = Vector3(10, 1, 10)
+material = SubResource("StandardMaterial3D_7rvo2")
+
+[node name="PlayerSpawn" type="Marker3D" parent="." groups=["player_spawn"]]

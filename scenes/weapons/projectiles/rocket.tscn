@@ -13,6 +13,8 @@ radius = 0.59074
 height = 2.81147
 
 [node name="RigidBody3D" type="RigidBody3D"]
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_3uabw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

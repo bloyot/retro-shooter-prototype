@@ -14,16 +14,16 @@ func _ready() -> void:
 		weapon.init(projectile_origin)
 	swap_weapon(active_weapon_index)
 
-func swap_weapon(weapon_index: int) -> void:		
+func swap_weapon(weapon_index: int) -> void:			
 	for i in range(0, weapons.size()):
 		weapons[i].visible = true if i == weapon_index else false		
 	active_weapon_index = weapon_index
 					
-func next_weapon() -> void:
-	swap_weapon((active_weapon_index + 1) % weapons.size())
+func next_weapon() -> void:	
+	swap_weapon(posmod(active_weapon_index + 1, weapons.size()))
 
 func prev_weapon() -> void:
-	swap_weapon((active_weapon_index - 1) % weapons.size())
+	swap_weapon(posmod(active_weapon_index - 1, weapons.size()))
 		
 func get_active_weapon() -> Weapon:
 	return weapons[active_weapon_index]

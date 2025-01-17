@@ -31,10 +31,9 @@ func _ready() -> void:
 	duration_timer.timeout.connect(func(): queue_free())	
 	
 	
-func on_area_entered(_area: Area3D) -> void:
-	print("area entered")
+func on_area_entered(_area: Area3D) -> void:	
 	if "player" not in area.get_parent().get_groups():
 		queue_free()
 
 func on_body_entered(body: Node) -> void: 
-	print(body.name)
+	queue_free()
