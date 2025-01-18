@@ -8,6 +8,7 @@ script = ExtResource("1_klwmw")
 type = "Projectile"
 cooldown_s = 0.5
 range = 1000.0
+damage = 100.0
 projectile_speed = 10.0
 projectile_scene = ExtResource("1_6oysg")
 projectile_duration_s = 5.0

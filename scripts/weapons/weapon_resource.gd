@@ -3,6 +3,7 @@ class_name WeaponResource extends Resource
 @export_enum("Projectile", "Hitscan") var type: String = "Hitscan"
 @export var cooldown_s: float
 @export var range: float
+@export var damage: float
 
 @export_category("Projectile")
 @export_group("Projectile")

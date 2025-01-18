@@ -1,8 +1,15 @@
-extends AnimatedSprite3D
+class_name Enemy extends AnimatedSprite3D
+
+@export var enemy_resource: EnemyResource
 
 @onready var player: Player = get_tree().get_first_node_in_group("game").player
 var active_direction: String = "s"
 var active_anim_name: String = "walk"
+var curr_health: float
+
+func _ready() -> void:
+	curr_health = enemy_resource.health
+	animation_finished.connect(on_animation_finished)
 
 func _process(delta: float) -> void:		
 	# forward vector for the enemy
@@ -15,8 +22,9 @@ func _process(delta: float) -> void:
 	var direction = angle_to_direction(angle)	
 	if active_direction != direction:
 		active_direction = direction
-		play(active_anim_name + "_" + active_direction)
-	print(active_direction)
+		play(active_anim_name + "_" + active_direction)	
+		
+	
 	
 func angle_to_direction(angle: float) -> String:
 	if angle > -22.5 and angle < 22.5:
@@ -38,3 +46,11 @@ func angle_to_direction(angle: float) -> String:
 	else:
 		return "bad!!"
 	
+func on_hit(weapon_resource: WeaponResource) -> void:
+	curr_health -= weapon_resource.damage
+	if curr_health < 0:
+		active_anim_name = "falling"		
+
+func on_animation_finished() -> void:
+	if active_anim_name == "falling":
+		queue_free()
