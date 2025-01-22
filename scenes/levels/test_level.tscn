@@ -1,0 +1,139 @@
+[gd_scene load_steps=9 format=3 uid="uid://dx5xxdrssglcc"]
+
+[ext_resource type="Material" uid="uid://l4fbkg5jukc6" path="res://assets/environment/prototype/materials/dark.tres" id="1_48k1e"]
+[ext_resource type="PackedScene" uid="uid://ch07gx0ie5as5" path="res://scenes/game.tscn" id="1_cakon"]
+[ext_resource type="PackedScene" uid="uid://drb600rubyjf6" path="res://scenes/player.tscn" id="2_rnf3g"]
+[ext_resource type="Material" uid="uid://b1ep2kdve5jmt" path="res://assets/environment/prototype/materials/light.tres" id="2_vvl1s"]
+[ext_resource type="PackedScene" uid="uid://c4e8dmnp1de17" path="res://scenes/environment/basic_environment.tscn" id="4_f8dm5"]
+[ext_resource type="Texture2D" uid="uid://2huhvds2kwvw" path="res://assets/environment/retro_fps/textures/Elements/LAVA.png" id="4_ro36h"]
+[ext_resource type="Material" uid="uid://cqc11wdpp68f4" path="res://assets/environment/prototype/materials/orange.tres" id="5_je6hn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fy36x"]
+albedo_texture = ExtResource("4_ro36h")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[node name="Platforming" type="Node3D"]
+
+[node name="Game" parent="." instance=ExtResource("1_cakon")]
+
+[node name="Player" parent="." instance=ExtResource("2_rnf3g")]
+
+[node name="PlayerSpawn" type="Marker3D" parent="." groups=["player_spawn"]]
+
+[node name="Level" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+
+[node name="Platforms" type="CSGCombiner3D" parent="Level"]
+
+[node name="CentralPlatform" type="CSGBox3D" parent="Level/Platforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+size = Vector3(30, 20, 30)
+material = ExtResource("1_48k1e")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Level/Platforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.7098, -7, 23.3144)
+radius = 4.518
+height = 10.0
+material = ExtResource("1_48k1e")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="Level/Platforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.2902, -7, -32.6856)
+radius = 4.518
+height = 10.0
+material = ExtResource("1_48k1e")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Level/Platforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.7098, -7, -19.8777)
+radius = 3.0
+height = 10.0
+material = ExtResource("1_48k1e")
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="Level/Platforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.2902, -7, 18.1223)
+radius = 3.0
+height = 10.0
+material = ExtResource("1_48k1e")
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="Level/Platforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.2902, -7, 33.1223)
+radius = 3.0
+height = 10.0
+material = ExtResource("1_48k1e")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Level/Platforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5005, -7, -34.1032)
+radius = 3.0
+height = 10.0
+material = ExtResource("1_48k1e")
+
+[node name="Lava" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.29044, 0)
+size = Vector3(100, 1, 100)
+material = SubResource("StandardMaterial3D_fy36x")
+
+[node name="Bridges" type="CSGCombiner3D" parent="Level"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Level/Bridges"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.4419, -0.5, 0)
+size = Vector3(35, 1, 10)
+material = ExtResource("5_je6hn")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Level/Bridges"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.74228e-08, -0.5, -32)
+size = Vector3(35, 1, 10)
+material = ExtResource("5_je6hn")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Level/Bridges"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.09278e-07, -0.5, 32.5)
+size = Vector3(35, 1, 10)
+material = ExtResource("5_je6hn")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Level/Bridges"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, -0.5, 0)
+size = Vector3(35, 1, 10)
+material = ExtResource("5_je6hn")
+
+[node name="UpperArea" type="CSGCombiner3D" parent="Level"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Level/UpperArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, -52)
+size = Vector3(100, 30, 5)
+material = ExtResource("1_48k1e")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Level/UpperArea"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -48, -11, 2.18557e-07)
+size = Vector3(100, 30, 5)
+material = ExtResource("1_48k1e")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Level/UpperArea"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 48, -11, -2.18557e-07)
+size = Vector3(100, 30, 5)
+material = ExtResource("1_48k1e")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Level/UpperArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 48)
+size = Vector3(100, 30, 5)
+material = ExtResource("1_48k1e")
+
+[node name="Outside" type="CSGCombiner3D" parent="Level"]
+
+[node name="CSGCombiner3D" type="CSGBox3D" parent="Level/Outside"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+size = Vector3(120, 30, 120)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Level/Outside/CSGCombiner3D"]
+operation = 2
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Level/Outside/CSGCombiner3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.5, 0)
+size = Vector3(110, 32, 110)
+material = ExtResource("2_vvl1s")
+
+[node name="Environment" parent="." instance=ExtResource("4_f8dm5")]
+
+[node name="DirectionalLight3D" parent="Environment" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 0.999999, 0, -1, -4.37114e-08, -0.00864601, 7.16934, 0.0041523)
+
+[editable path="Environment"]

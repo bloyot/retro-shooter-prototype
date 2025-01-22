@@ -1,32 +1,39 @@
-[gd_scene load_steps=7 format=3 uid="uid://ccs72m1nyeolx"]
+[gd_scene load_steps=10 format=3 uid="uid://ccs72m1nyeolx"]
 
-[ext_resource type="Material" uid="uid://l4fbkg5jukc6" path="res://assets/environment/prototype/materials/floor.tres" id="1_yotmk"]
-[ext_resource type="Material" uid="uid://cqc11wdpp68f4" path="res://assets/environment/prototype/materials/block.tres" id="2_wof4v"]
-[ext_resource type="Texture2D" uid="uid://bnf14gvqhciba" path="res://assets/environment/prototype/textures/Purple/texture_05.png" id="3_kn648"]
-[ext_resource type="Material" uid="uid://b1ep2kdve5jmt" path="res://assets/environment/prototype/materials/wall.tres" id="4_eqb6y"]
-[ext_resource type="PackedScene" uid="uid://dstb5bwp58aet" path="res://scenes/levels/enemy.tscn" id="5_17u8a"]
+[ext_resource type="PackedScene" uid="uid://ch07gx0ie5as5" path="res://scenes/game.tscn" id="1_i1xq3"]
+[ext_resource type="Material" uid="uid://l4fbkg5jukc6" path="res://assets/environment/prototype/materials/dark.tres" id="1_xtiv1"]
+[ext_resource type="PackedScene" uid="uid://drb600rubyjf6" path="res://scenes/player.tscn" id="2_gif2k"]
+[ext_resource type="Material" uid="uid://cqc11wdpp68f4" path="res://assets/environment/prototype/materials/orange.tres" id="2_h283w"]
+[ext_resource type="Texture2D" uid="uid://bnf14gvqhciba" path="res://assets/environment/prototype/textures/Purple/texture_05.png" id="3_1fo5k"]
+[ext_resource type="Material" uid="uid://b1ep2kdve5jmt" path="res://assets/environment/prototype/materials/light.tres" id="4_kakw8"]
+[ext_resource type="PackedScene" uid="uid://dstb5bwp58aet" path="res://scenes/enemy.tscn" id="5_e54io"]
+[ext_resource type="PackedScene" uid="uid://c4e8dmnp1de17" path="res://scenes/environment/basic_environment.tscn" id="6_fdvvw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q5nv4"]
-albedo_texture = ExtResource("3_kn648")
+albedo_texture = ExtResource("3_1fo5k")
 uv1_triplanar = true
 uv1_world_triplanar = true
 
-[node name="Arena" type="Node3D"]
+[node name="Playground" type="Node3D"]
+
+[node name="Game" parent="." instance=ExtResource("1_i1xq3")]
+
+[node name="Player" parent="." instance=ExtResource("2_gif2k")]
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 use_collision = true
 
 [node name="Floor" type="CSGBox3D" parent="CSGCombiner3D"]
-size = Vector3(30, 1, 30)
-material = ExtResource("1_yotmk")
+size = Vector3(60, 1, 60)
+material = ExtResource("1_xtiv1")
 
 [node name="Ramps" type="CSGCombiner3D" parent="CSGCombiner3D"]
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D/Ramps"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.586624, 0)
 size = Vector3(3, 3, 3)
-material = ExtResource("2_wof4v")
+material = ExtResource("2_h283w")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="CSGCombiner3D/Ramps"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.586588, 0.463862, 1.49866)
@@ -55,29 +62,31 @@ material = SubResource("StandardMaterial3D_q5nv4")
 [node name="Walls" type="CSGCombiner3D" parent="CSGCombiner3D"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 15)
-size = Vector3(32, 5, 1)
-material = ExtResource("4_eqb6y")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 30)
+size = Vector3(60, 5, 1)
+material = ExtResource("4_kakw8")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D/Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -15)
-size = Vector3(32, 5, 1)
-material = ExtResource("4_eqb6y")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -30)
+size = Vector3(60, 5, 1)
+material = ExtResource("4_kakw8")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D/Walls"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 15, 1, -9.53674e-07)
-size = Vector3(32, 5, 1)
-material = ExtResource("4_eqb6y")
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 30, 1, -9.53674e-07)
+size = Vector3(60, 5, 1)
+material = ExtResource("4_kakw8")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D/Walls"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15.5503, 1, 3.81723e-07)
-size = Vector3(32, 5, 1)
-material = ExtResource("4_eqb6y")
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -30.5503, 1, 3.81723e-07)
+size = Vector3(60, 5, 1)
+material = ExtResource("4_kakw8")
 
 [node name="PlayerSpawn" type="Marker3D" parent="." groups=["player_spawn"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.003)
 
 [node name="Enemies" type="Node3D" parent="."]
 
-[node name="Enemy" parent="Enemies" instance=ExtResource("5_17u8a")]
+[node name="Enemy" parent="Enemies" instance=ExtResource("5_e54io")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5641, 1, 3.95281)
+
+[node name="Environment" parent="." instance=ExtResource("6_fdvvw")]

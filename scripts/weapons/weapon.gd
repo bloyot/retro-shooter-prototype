@@ -54,7 +54,7 @@ func camera_raycast() -> Array:
 	else:
 		return [null, ray_end, null]
 		
-func spawn_decal(position: Vector3, normal: Vector3) -> void:
+func spawn_decal(spawn_position: Vector3, normal: Vector3) -> void:
 	var decal = hit_decal.instantiate()
 	get_tree().get_root().add_child(decal)
-	decal.global_translate(position+(normal*.01))
+	decal.global_translate(spawn_position+(normal*.01))

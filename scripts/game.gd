@@ -12,6 +12,7 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	active_spawn = player_spawns[0] as Marker3D
 	player.global_position = active_spawn.global_position
+	player.global_rotation = active_spawn.global_rotation
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -34,6 +35,6 @@ func _process(delta: float) -> void:
 		reset()
 
 func reset() -> void:
-	player.global_position = active_spawn.global_position		
-	player.global_rotation = Vector3.ZERO
+	player.global_position = active_spawn.global_position			
+	player.global_rotation = active_spawn.global_rotation
 	player.camera.rotation = Vector3.ZERO

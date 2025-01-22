@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_5mv68"]
 
-[node name="Game" type="Node3D"]
+[node name="Game" type="Node3D" groups=["game"]]
 script = ExtResource("1_5mv68")
 
 [node name="ProjectilesContainer" type="Node3D" parent="."]
