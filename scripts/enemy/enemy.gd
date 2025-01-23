@@ -1,10 +1,13 @@
-class_name Enemy extends AnimatedSprite3D
+class_name Enemy extends Sprite3D
 
 @export var enemy_resource: EnemyResource
 @export var is_patrol: bool
 @export var patrol_marker: Marker3D
 
 @onready var player: Player = get_tree().get_first_node_in_group("game").player
+@onready var sprite: AnimatedSprite2D = %EnemySprite
+@onready var damage_flash_timer: Timer = %DamageFlashTimer
+@onready var flash_shader: ShaderMaterial = sprite.material
 
 var start_point: Vector3
 var move_towards_patrol: bool = true
@@ -15,8 +18,14 @@ var active_anim_name: String = "idle"
 var curr_health: float
 
 func _ready() -> void:
+	# set variables
 	curr_health = enemy_resource.health
-	animation_finished.connect(on_animation_finished)
+	
+	# connect signals
+	sprite.animation_finished.connect(on_animation_finished)
+	damage_flash_timer.timeout.connect(on_damage_flash_timeout)
+	
+	# initialize patrol settings
 	start_point = global_position
 	if is_patrol and patrol_marker != null:
 		active_anim_name = "walk"
@@ -72,6 +81,7 @@ func angle_to_direction(angle: float) -> String:
 		return "bad!!"
 	
 func on_hit(weapon_resource: WeaponResource) -> void:
+	damage_flash()
 	curr_health -= weapon_resource.damage
 	if curr_health <= 0 and !active_anim_name.begins_with("die"):
 		active_anim_name = "die"		
@@ -84,10 +94,19 @@ func on_animation_finished() -> void:
 
 func change_animation(anim_name: String, maintain_progress: bool = false) -> void:
 	var curr_frame = frame
-	var curr_progress = frame_progress
-	play(anim_name + "_" + active_direction)
+	var curr_progress = sprite.frame_progress
+	sprite.play(anim_name + "_" + active_direction)
 	
 	# when changing viewed direction, maintain the current frame and progress of the animation,
 	# otherwise the animation resets
 	if maintain_progress:
-		set_frame_and_progress(curr_frame, curr_progress)	
+		sprite.set_frame_and_progress(curr_frame, curr_progress)	
+		
+func damage_flash() -> void:
+	if damage_flash_timer.is_stopped() and active_anim_name != "die":
+		damage_flash_timer.start()		
+		flash_shader.set_shader_parameter("active", true)		
+		
+func on_damage_flash_timeout() -> void:
+	flash_shader.set_shader_parameter("active", false)		
+	

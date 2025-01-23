@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dgewo8frwosi"]
+[gd_scene load_steps=16 format=3 uid="uid://dgewo8frwosi"]
 
 [ext_resource type="PackedScene" uid="uid://ch07gx0ie5as5" path="res://scenes/game.tscn" id="2_fw2db"]
 [ext_resource type="Texture2D" uid="uid://m2seyxk5ct4" path="res://assets/environment/retro_fps_2/concreteWall.png" id="3_hbweo"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dhpyxini4at37" path="res://assets/environment/retro_fps_2/floortile1.png" id="4_17ntc"]
 [ext_resource type="Texture2D" uid="uid://d2t5q06xcsncn" path="res://assets/environment/retro_fps_2/cor_metal_1.png" id="4_baf0x"]
 [ext_resource type="Texture2D" uid="uid://yt86w8kuhcfw" path="res://assets/environment/retro_fps_2/wood1.png" id="6_gww80"]
-[ext_resource type="PackedScene" uid="uid://dstb5bwp58aet" path="res://scenes/enemy.tscn" id="6_opk7c"]
+[ext_resource type="PackedScene" uid="uid://dstb5bwp58aet" path="res://scenes/enemy/enemy.tscn" id="6_opk7c"]
 [ext_resource type="PackedScene" uid="uid://c4e8dmnp1de17" path="res://scenes/environment/basic_environment.tscn" id="7_raykv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bmo1a"]
@@ -27,6 +27,15 @@ uv1_world_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dv63e"]
 albedo_texture = ExtResource("6_gww80")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_herlg"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_neytd"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rcl87"]
+viewport_path = NodePath("SubViewport")
 
 [node name="ArtTest" type="Node3D"]
 
@@ -96,14 +105,17 @@ material = SubResource("StandardMaterial3D_dv63e")
 
 [node name="Enemy" parent="Enemies" node_paths=PackedStringArray("patrol_marker") instance=ExtResource("6_opk7c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.877, 0.5, -26.495)
+texture = SubResource("ViewportTexture_herlg")
 is_patrol = true
 patrol_marker = NodePath("../Marker3D")
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource("6_opk7c")]
 transform = Transform3D(-0.871454, 0, -0.490478, 0, 1, 0, 0.490478, 0, -0.871454, -4.32946, 0.458215, -30.4949)
+texture = SubResource("ViewportTexture_neytd")
 
 [node name="Enemy3" parent="Enemies" node_paths=PackedStringArray("patrol_marker") instance=ExtResource("6_opk7c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3295, 0.458215, -33.4949)
+texture = SubResource("ViewportTexture_rcl87")
 is_patrol = true
 patrol_marker = NodePath("../Marker3D2")
 

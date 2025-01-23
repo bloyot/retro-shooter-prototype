@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://u572rjsvp8rp"]
+
+[ext_resource type="Material" uid="uid://c6ipgybel1a0b" path="res://shaders/flash.tres" id="1_1sjbu"]
+[ext_resource type="SpriteFrames" uid="uid://1d48bj53emfi" path="res://scenes/enemy/enemy_sprite_frames.tres" id="2_sneer"]
+
+[node name="EnemySprite" type="AnimatedSprite2D"]
+material = ExtResource("1_1sjbu")
+sprite_frames = ExtResource("2_sneer")
+animation = &"die_e"
+frame = 46
+frame_progress = 0.397946
+offset = Vector2(150, 150)

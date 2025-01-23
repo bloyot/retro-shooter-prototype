@@ -1,12 +1,13 @@
-shader_type spatial;
+shader_type canvas_item;
 
 uniform bool active;
 uniform vec3 flash_color : source_color = vec3(1.0);
 
-uniform sampler2D sprite_texture : source_color, filter_nearest;
 
 void fragment(){
-	vec4 color = texture(sprite_texture, UV);
-	ALBEDO = color.rgb;
-	ALPHA = color.a;
+	vec4 t = texture(TEXTURE, UV);
+	if (active == true) {
+		COLOR = vec4(flash_color, t.a);
+	}
+	
 }

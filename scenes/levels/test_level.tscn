@@ -13,7 +13,7 @@ albedo_texture = ExtResource("4_ro36h")
 uv1_triplanar = true
 uv1_world_triplanar = true
 
-[node name="Platforming" type="Node3D"]
+[node name="TestLevel" type="Node3D"]
 
 [node name="Game" parent="." instance=ExtResource("1_cakon")]
 
