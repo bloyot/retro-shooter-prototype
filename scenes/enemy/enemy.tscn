@@ -1,16 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://dstb5bwp58aet"]
+[gd_scene load_steps=9 format=3 uid="uid://dstb5bwp58aet"]
 
 [ext_resource type="PackedScene" uid="uid://u572rjsvp8rp" path="res://scenes/enemy/enemy_sprite.tscn" id="3_3syau"]
 [ext_resource type="Script" path="res://scripts/enemy/enemy.gd" id="49_g1t7c"]
 [ext_resource type="Resource" uid="uid://dn521evqbbyld" path="res://scripts/enemy/resources/ranged_enemy.tres" id="50_e42s1"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_wmkdu"]
-viewport_path = NodePath("SubViewport")
+[sub_resource type="BoxShape3D" id="BoxShape3D_bohoa"]
+resource_local_to_scene = true
+size = Vector3(0.7, 1.8, 0.19)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e2oge"]
-size = Vector3(0.795044, 1.84497, 0.272461)
+resource_local_to_scene = true
+size = Vector3(0.8, 1.9, 0.2)
 
-[sub_resource type="Shader" id="Shader_3lnvy"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_44fss"]
+viewport_path = NodePath("Enemy/SubViewport")
+
+[sub_resource type="Shader" id="Shader_lek2v"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -28,37 +33,42 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dn4rk"]
 resource_local_to_scene = true
-shader = SubResource("Shader_3lnvy")
+shader = SubResource("Shader_lek2v")
 shader_parameter/active = false
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 
-[node name="Enemy" type="Sprite3D" groups=["enemy"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.458215, 0.455486)
-billboard = 2
-texture = SubResource("ViewportTexture_wmkdu")
+[node name="CharacterBody3D" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("49_g1t7c")
 enemy_resource = ExtResource("50_e42s1")
 
-[node name="Area3D" type="Area3D" parent="." groups=["enemy"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0465104, 0, 0)
+[node name="CollisionBox" type="CollisionShape3D" parent="." groups=["enemy"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.000946052)
+shape = SubResource("BoxShape3D_bohoa")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" groups=["enemy"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.102478, -0.0948486, -0.0297852)
+[node name="Area3D" type="Area3D" parent="." groups=["enemy"]]
+
+[node name="HitBox" type="CollisionShape3D" parent="Area3D" groups=["enemy"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.000946052)
 shape = SubResource("BoxShape3D_e2oge")
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="Enemy" type="Sprite3D" parent="." groups=["enemy"]]
+billboard = 2
+texture = SubResource("ViewportTexture_44fss")
+
+[node name="SubViewport" type="SubViewport" parent="Enemy"]
 disable_3d = true
 transparent_bg = true
 size = Vector2i(300, 300)
 
-[node name="EnemySprite" parent="SubViewport" instance=ExtResource("3_3syau")]
+[node name="EnemySprite" parent="Enemy/SubViewport" instance=ExtResource("3_3syau")]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_dn4rk")
 animation = &"idle_s"
 frame = 0
 frame_progress = 0.0
 
-[node name="DamageFlashTimer" type="Timer" parent="."]
+[node name="DamageFlashTimer" type="Timer" parent="Enemy"]
 unique_name_in_owner = true
 wait_time = 0.1
 one_shot = true

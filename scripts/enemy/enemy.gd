@@ -1,4 +1,4 @@
-class_name Enemy extends Sprite3D
+class_name Enemy extends CharacterBody3D
 
 @export var enemy_resource: EnemyResource
 @export var is_patrol: bool
@@ -84,16 +84,14 @@ func on_hit(weapon_resource: WeaponResource) -> void:
 	damage_flash()
 	curr_health -= weapon_resource.damage
 	if curr_health <= 0 and !active_anim_name.begins_with("die"):
-		active_anim_name = "die"		
-		change_animation("die")
-		is_patrol = false
+		die()
 
 func on_animation_finished() -> void:
 	if active_anim_name == "die":
 		queue_free()
 
 func change_animation(anim_name: String, maintain_progress: bool = false) -> void:
-	var curr_frame = frame
+	var curr_frame = sprite.frame
 	var curr_progress = sprite.frame_progress
 	sprite.play(anim_name + "_" + active_direction)
 	
@@ -109,4 +107,10 @@ func damage_flash() -> void:
 		
 func on_damage_flash_timeout() -> void:
 	flash_shader.set_shader_parameter("active", false)		
+	
+func die() -> void:
+	active_anim_name = "die"		
+	change_animation("die")
+	is_patrol = false
+	EventManager.publish(GlobalUtils.EventType.ENEMY_DEATH, [])
 	

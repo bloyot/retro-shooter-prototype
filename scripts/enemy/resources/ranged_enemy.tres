@@ -6,3 +6,4 @@
 script = ExtResource("1_226ku")
 health = 100.0
 move_speed = 10.0
+melee_damage = 15.0

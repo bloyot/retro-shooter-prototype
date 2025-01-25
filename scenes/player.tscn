@@ -9,6 +9,12 @@
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_buk5e")
 
+[node name="Hitbox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00666, 0)
+shape = SubResource("CapsuleShape3D_wrds2")
+
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.53516, 0)
 
@@ -37,3 +43,10 @@ layout_mode = 2
 texture = ExtResource("2_uww38")
 
 [node name="ShootCooldown" type="Timer" parent="." groups=["player"]]
+
+[node name="CoyoteTime" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="DamageInvulnTimer" type="Timer" parent="."]
+one_shot = true

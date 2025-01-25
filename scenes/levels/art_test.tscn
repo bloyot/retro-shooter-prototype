@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://dgewo8frwosi"]
+[gd_scene load_steps=15 format=3 uid="uid://dgewo8frwosi"]
 
 [ext_resource type="PackedScene" uid="uid://ch07gx0ie5as5" path="res://scenes/game.tscn" id="2_fw2db"]
 [ext_resource type="Texture2D" uid="uid://m2seyxk5ct4" path="res://assets/environment/retro_fps_2/concreteWall.png" id="3_hbweo"]
-[ext_resource type="PackedScene" uid="uid://drb600rubyjf6" path="res://scenes/player.tscn" id="3_t5xg0"]
 [ext_resource type="Texture2D" uid="uid://dhpyxini4at37" path="res://assets/environment/retro_fps_2/floortile1.png" id="4_17ntc"]
 [ext_resource type="Texture2D" uid="uid://d2t5q06xcsncn" path="res://assets/environment/retro_fps_2/cor_metal_1.png" id="4_baf0x"]
 [ext_resource type="Texture2D" uid="uid://yt86w8kuhcfw" path="res://assets/environment/retro_fps_2/wood1.png" id="6_gww80"]
@@ -40,8 +39,6 @@ viewport_path = NodePath("SubViewport")
 [node name="ArtTest" type="Node3D"]
 
 [node name="Game" parent="." instance=ExtResource("2_fw2db")]
-
-[node name="Player" parent="." instance=ExtResource("3_t5xg0")]
 
 [node name="Level" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)

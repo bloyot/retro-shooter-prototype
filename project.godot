@@ -11,7 +11,13 @@ config_version=5
 [application]
 
 config/name="retro-shooter-prototype"
+run/main_scene="res://scenes/levels/test_level.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+
+[autoload]
+
+EventManager="*res://scripts/events/event_manager.gd"
+GlobalUtils="*res://scripts/globals.gd"
 
 [display]
 
@@ -29,6 +35,7 @@ enemy=""
 player=""
 player_spawn=""
 game=""
+killbox=""
 
 [input]
 

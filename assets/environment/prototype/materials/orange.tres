@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ctcug4w3s0xfp" path="res://assets/environment/prototype/textures/Orange/texture_01.png" id="1_ix0wd"]
 
 [resource]
+resource_local_to_scene = true
 albedo_texture = ExtResource("1_ix0wd")
 uv1_triplanar = true
 uv1_world_triplanar = true

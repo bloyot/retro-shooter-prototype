@@ -1,12 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://dx5xxdrssglcc"]
+[gd_scene load_steps=13 format=3 uid="uid://dx5xxdrssglcc"]
 
 [ext_resource type="Material" uid="uid://l4fbkg5jukc6" path="res://assets/environment/prototype/materials/dark.tres" id="1_48k1e"]
 [ext_resource type="PackedScene" uid="uid://ch07gx0ie5as5" path="res://scenes/game.tscn" id="1_cakon"]
-[ext_resource type="PackedScene" uid="uid://drb600rubyjf6" path="res://scenes/player.tscn" id="2_rnf3g"]
 [ext_resource type="Material" uid="uid://b1ep2kdve5jmt" path="res://assets/environment/prototype/materials/light.tres" id="2_vvl1s"]
 [ext_resource type="PackedScene" uid="uid://c4e8dmnp1de17" path="res://scenes/environment/basic_environment.tscn" id="4_f8dm5"]
+[ext_resource type="Material" uid="uid://dlt8cijwbeu6t" path="res://assets/environment/prototype/materials/purple.tres" id="4_rnqg2"]
 [ext_resource type="Texture2D" uid="uid://2huhvds2kwvw" path="res://assets/environment/retro_fps/textures/Elements/LAVA.png" id="4_ro36h"]
 [ext_resource type="Material" uid="uid://cqc11wdpp68f4" path="res://assets/environment/prototype/materials/orange.tres" id="5_je6hn"]
+[ext_resource type="Material" uid="uid://cpdkwfomo0iso" path="res://assets/environment/prototype/materials/red.tres" id="6_kjpje"]
+[ext_resource type="Material" uid="uid://c4dbbwcon6wei" path="res://assets/environment/prototype/materials/green.tres" id="7_6l3um"]
+[ext_resource type="PackedScene" uid="uid://d1vu566ab3bff" path="res://scenes/killbox.tscn" id="7_wcg33"]
+[ext_resource type="PackedScene" uid="uid://dstb5bwp58aet" path="res://scenes/enemy/enemy.tscn" id="11_tyclf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fy36x"]
 albedo_texture = ExtResource("4_ro36h")
@@ -17,9 +21,8 @@ uv1_world_triplanar = true
 
 [node name="Game" parent="." instance=ExtResource("1_cakon")]
 
-[node name="Player" parent="." instance=ExtResource("2_rnf3g")]
-
 [node name="PlayerSpawn" type="Marker3D" parent="." groups=["player_spawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="Level" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -78,7 +81,7 @@ material = SubResource("StandardMaterial3D_fy36x")
 [node name="CSGBox3D" type="CSGBox3D" parent="Level/Bridges"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.4419, -0.5, 0)
 size = Vector3(35, 1, 10)
-material = ExtResource("5_je6hn")
+material = ExtResource("4_rnqg2")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="Level/Bridges"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.74228e-08, -0.5, -32)
@@ -88,12 +91,12 @@ material = ExtResource("5_je6hn")
 [node name="CSGBox3D4" type="CSGBox3D" parent="Level/Bridges"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.09278e-07, -0.5, 32.5)
 size = Vector3(35, 1, 10)
-material = ExtResource("5_je6hn")
+material = ExtResource("6_kjpje")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Level/Bridges"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, -0.5, 0)
 size = Vector3(35, 1, 10)
-material = ExtResource("5_je6hn")
+material = ExtResource("7_6l3um")
 
 [node name="UpperArea" type="CSGCombiner3D" parent="Level"]
 
@@ -135,5 +138,14 @@ material = ExtResource("2_vvl1s")
 
 [node name="DirectionalLight3D" parent="Environment" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 0.999999, 0, -1, -4.37114e-08, -0.00864601, 7.16934, 0.0041523)
+
+[node name="Killbox" parent="." groups=["killbox"] instance=ExtResource("7_wcg33")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7, 0)
+size = Vector3(200, 1, 200)
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="Enemy" parent="Enemies" groups=["enemy"] instance=ExtResource("11_tyclf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.458215, -4.54451)
 
 [editable path="Environment"]

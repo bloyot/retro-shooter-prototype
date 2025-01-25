@@ -23,7 +23,7 @@ func get_weapon_cooldown_s() -> float:
 
 func raycast_fire(raycast_result: Array) -> void:
 	var collider: Node3D = raycast_result[0]
-	if collider != null:			
+	if collider != null:					
 		if collider.is_in_group("enemy"):
 			# TODO we should probably register the enemy Area3Ds with the game on ready, so that we can look them up that way,
 			# rather than do this kind of brittle get parent and group based thing, but this works for now
