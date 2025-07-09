@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://dstb5bwp58aet"]
 
+[ext_resource type="Resource" uid="uid://dl6u0k3r7ne1s" path="res://scripts/enemy/resources/melee_enemy.tres" id="2_7nmsi"]
 [ext_resource type="PackedScene" uid="uid://u572rjsvp8rp" path="res://scenes/enemy/enemy_sprite.tscn" id="3_3syau"]
-[ext_resource type="Script" path="res://scripts/enemy/enemy.gd" id="49_g1t7c"]
-[ext_resource type="Resource" uid="uid://dn521evqbbyld" path="res://scripts/enemy/resources/ranged_enemy.tres" id="50_e42s1"]
+[ext_resource type="Script" uid="uid://bvt400t810iow" path="res://scripts/enemy/enemy.gd" id="49_g1t7c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bohoa"]
 resource_local_to_scene = true
@@ -15,7 +15,7 @@ size = Vector3(0.8, 1.9, 0.2)
 [sub_resource type="ViewportTexture" id="ViewportTexture_44fss"]
 viewport_path = NodePath("Enemy/SubViewport")
 
-[sub_resource type="Shader" id="Shader_lek2v"]
+[sub_resource type="Shader" id="Shader_40wdo"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -33,14 +33,14 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dn4rk"]
 resource_local_to_scene = true
-shader = SubResource("Shader_lek2v")
+shader = SubResource("Shader_40wdo")
 shader_parameter/active = false
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[node name="Enemy" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("49_g1t7c")
-enemy_resource = ExtResource("50_e42s1")
+enemy_resource = ExtResource("2_7nmsi")
 
 [node name="CollisionBox" type="CollisionShape3D" parent="." groups=["enemy"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.000946052)
@@ -72,3 +72,8 @@ frame_progress = 0.0
 unique_name_in_owner = true
 wait_time = 0.1
 one_shot = true
+
+[node name="ShootCooldownTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+autostart = true

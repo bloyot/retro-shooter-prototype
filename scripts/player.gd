@@ -1,10 +1,14 @@
 class_name Player
 extends CharacterBody3D
 
-const SPEED = 10.0
+const SPEED = 12.0
+const KNOCKBACK_SPEED = 20.0
+const ACCELERATION = 0.8
 const DECELERATION = 0.5
-const JUMP_VELOCITY = 7
-const MOUSE_SENSITIVITY = .1
+const AIR_DECELERATION = 0.1
+const JUMP_VELOCITY = 4
+const MOUSE_SENSITIVITY = 0.07
+const AIR_CONTROL_FACTOR = 0.2
 
 @onready var camera: Camera3D = $Camera
 @onready var projectiles_container := get_tree().current_scene.get_node("Game/ProjectilesContainer")	
@@ -16,10 +20,12 @@ const MOUSE_SENSITIVITY = .1
 @onready var shoot_cooldown_timer := $ShootCooldown
 @onready var coyote_time:= $CoyoteTime
 @onready var damage_invuln_timer:= $CoyoteTime
+@onready var knockback_timer:= $KnockbackTimer
 
 var shoot_cooldown := false
 var coyote_time_eligible:= true
 var damange_invlun_cooldown = 1
+var knockback_cooldown = .2
 var max_health = 100
 var curr_health = max_health
 
@@ -30,6 +36,7 @@ func _ready() -> void:
 	shoot_cooldown_timer.timeout.connect(on_shoot_cooldown_timer)		
 	hitbox.area_entered.connect(on_area_entered)
 	hitbox.area_exited.connect(on_area_exited)
+	
 
 func _physics_process(delta: float) -> void:
 	handle_movement(delta)
@@ -38,7 +45,7 @@ func _physics_process(delta: float) -> void:
 	handle_collisions()
 	
 func handle_movement(delta: float) -> void: 
-	# Add the gravity.
+	# Add the gravity, handle coyote time
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 		if coyote_time.is_stopped() and coyote_time_eligible:
@@ -53,12 +60,22 @@ func handle_movement(delta: float) -> void:
 
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backwards")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+	# ground movement
+	if is_on_floor():
+		if direction and can_move():
+			velocity.x = move_toward(velocity.x, direction.x * SPEED, ACCELERATION)
+			velocity.z = move_toward(velocity.z, direction.z * SPEED, ACCELERATION)
+		else:
+			velocity.x = move_toward(velocity.x, 0, DECELERATION)
+			velocity.z = move_toward(velocity.z, 0, DECELERATION)
 	else:
-		velocity.x = move_toward(velocity.x, 0, DECELERATION)
-		velocity.z = move_toward(velocity.z, 0, DECELERATION)
+		# air movement
+		if direction and can_move():
+			velocity.x = move_toward(velocity.x, direction.x * SPEED, AIR_CONTROL_FACTOR)
+			velocity.z = move_toward(velocity.z, direction.z * SPEED, AIR_CONTROL_FACTOR)
+		else:
+			velocity.x = move_toward(velocity.x, 0, AIR_DECELERATION)
+			velocity.z = move_toward(velocity.z, 0, AIR_DECELERATION)
 
 	move_and_slide()
 	
@@ -78,6 +95,7 @@ func handle_collisions() -> void:
 	for obj in colliding_objects:
 		if obj is Enemy:
 			take_damage(obj.enemy_resource.melee_damage)
+			damage_knockback(obj)
 
 #### event callbacks #####
 func on_shoot_cooldown_timer() -> void:
@@ -119,6 +137,10 @@ func on_area_exited(area: Area3D):
 func can_jump() -> bool:
 	# currently just check if we are on the floor (or were within the last few frames)
 	return is_on_floor() or !coyote_time.is_stopped()
+	
+func can_move() -> bool:
+	# don't allow us to move if we're being knocked back
+	return knockback_timer.is_stopped()
 			
 func take_damage(damage: float) -> void:	
 	if damage_invuln_timer.is_stopped():
@@ -127,3 +149,10 @@ func take_damage(damage: float) -> void:
 		EventManager.publish(GlobalUtils.EventType.PLAYER_DAMAGE, [damage])	
 		if curr_health <= 0:			
 			die()
+			
+func damage_knockback(enemy: Enemy) -> void:				
+	if knockback_timer.is_stopped():
+		# get direction to be knocked back
+		var collision_normal = (global_position - enemy.global_position).normalized()
+		velocity = collision_normal * KNOCKBACK_SPEED
+		knockback_timer.start(knockback_cooldown)

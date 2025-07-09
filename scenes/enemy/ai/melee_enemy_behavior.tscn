@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyssawwjldcik"]
+
+[ext_resource type="Script" uid="uid://rgscygrk2621" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_p71mo"]
+[ext_resource type="Script" uid="uid://c63wvojklmyo3" path="res://addons/beehave/nodes/composites/sequence.gd" id="2_0qge8"]
+[ext_resource type="Script" uid="uid://b6cga88uqawm7" path="res://scripts/enemy/ai/conditions/within_aggro_range_condition.gd" id="2_ur5ws"]
+[ext_resource type="Script" uid="uid://bks6d0wgf2jbj" path="res://scripts/enemy/ai/actions/move_towards_player.gd" id="4_1jl2o"]
+
+[node name="MeleeEnemyBehavior" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("1_p71mo")
+blackboard = NodePath("@Node@21808")
+actor = NodePath("")
+
+[node name="SequenceComposite" type="Node" parent="."]
+script = ExtResource("2_0qge8")
+
+[node name="WithinAggroRange" type="Node" parent="SequenceComposite"]
+script = ExtResource("2_ur5ws")
+
+[node name="MoveTowardsPlayer" type="Node" parent="SequenceComposite"]
+script = ExtResource("4_1jl2o")

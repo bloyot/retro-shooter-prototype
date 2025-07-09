@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WeaponResource" load_steps=3 format=3 uid="uid://64umhhs0cypp"]
 
 [ext_resource type="PackedScene" uid="uid://cvge1hg5ed3ow" path="res://scenes/weapons/projectiles/rocket.tscn" id="1_6oysg"]
-[ext_resource type="Script" path="res://scripts/weapons/weapon_resource.gd" id="1_klwmw"]
+[ext_resource type="Script" uid="uid://c6tm8o883j8e4" path="res://scripts/weapons/weapon_resource.gd" id="1_klwmw"]
 
 [resource]
 script = ExtResource("1_klwmw")

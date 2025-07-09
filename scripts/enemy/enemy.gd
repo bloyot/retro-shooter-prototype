@@ -8,10 +8,10 @@ class_name Enemy extends CharacterBody3D
 @onready var sprite: AnimatedSprite2D = %EnemySprite
 @onready var damage_flash_timer: Timer = %DamageFlashTimer
 @onready var flash_shader: ShaderMaterial = sprite.material
+@onready var shoot_cooldown_timer: Timer = %ShootCooldownTimer
 
 var start_point: Vector3
-var move_towards_patrol: bool = true
-var speed = 3
+var target_position: Vector3
 
 var active_direction: String = "s"
 var active_anim_name: String = "idle"
@@ -27,27 +27,25 @@ func _ready() -> void:
 	
 	# initialize patrol settings
 	start_point = global_position
+	target_position = start_point
 	if is_patrol and patrol_marker != null:
 		active_anim_name = "walk"
 		look_at(patrol_marker.global_position, Vector3.UP, true)
+		
+	# initiate our behavior and add it to the scene
+	add_child(enemy_resource.behavior.instantiate())
 
 func _process(delta: float) -> void:		
-	if is_patrol and patrol_marker != null:
-		if move_towards_patrol: 
-			position = position.move_toward(patrol_marker.global_position, speed * delta)								
-			if global_position.is_equal_approx(patrol_marker.global_position):
-				move_towards_patrol = false
-				look_at(start_point, Vector3.UP, true)
-		else:
-			position = position.move_toward(start_point, speed * delta)
-			if position.is_equal_approx(start_point):
-				move_towards_patrol = true
-				look_at(patrol_marker.global_position, Vector3.UP, true)
-		
+	if !target_position.is_equal_approx(global_position) and active_anim_name != "die":
+		if active_anim_name != "walk":
+			change_animation("walk")
+		rotate_towards(target_position)
+		velocity = (target_position - global_position).normalized() * enemy_resource.move_speed
 	set_facing()
+	move_and_slide()
 		
 func set_facing() -> void:
-		# forward vector for the enemy
+	# forward vector for the enemy
 	var enemy_facing = Vector2(global_basis.z.x, global_basis.z.z)
 	
 	# vector from enemy to player
@@ -59,7 +57,15 @@ func set_facing() -> void:
 		active_direction = direction
 		change_animation(active_anim_name, true)
 		
+func rotate_towards(pos: Vector3) -> void:
+	var direction = (pos - global_position).normalized()
+	var angle = atan2(direction.x, direction.z)
+	global_rotation.y = lerp_angle(global_rotation.y, angle, .05)		
 	
+# return true if facing towards the position (within 22.5 degress on either side
+func is_facing_player() -> bool:	
+	return active_direction == "s"
+
 func angle_to_direction(angle: float) -> String:
 	if angle > -22.5 and angle < 22.5:
 		return "s"
@@ -113,4 +119,17 @@ func die() -> void:
 	change_animation("die")
 	is_patrol = false
 	EventManager.publish(GlobalUtils.EventType.ENEMY_DEATH, [])
-	
+
+func shoot(target_position: Vector3) -> void: 			
+	var projectile = Projectile.new_projectile(
+		enemy_resource.projectile_scene, 
+		global_position + global_basis.z,
+		target_position, 
+		enemy_resource.projectile_speed,
+		get_tree().current_scene,
+		5
+	)		
+	shoot_cooldown_timer.start()	
+
+func can_shoot() -> bool: 
+	return shoot_cooldown_timer.is_stopped()

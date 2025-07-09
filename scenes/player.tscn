@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://drb600rubyjf6"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_buk5e"]
+[ext_resource type="Script" uid="uid://cvud5pn8tym4k" path="res://scripts/player.gd" id="1_buk5e"]
 [ext_resource type="PackedScene" uid="uid://cub7k8udl6uuu" path="res://scenes/weapons/weapon_manager.tscn" id="2_shuod"]
 [ext_resource type="Texture2D" uid="uid://d21hu8370w5ih" path="res://assets/models/weapons/crosshair.png" id="2_uww38"]
 
@@ -49,4 +49,8 @@ wait_time = 0.1
 one_shot = true
 
 [node name="DamageInvulnTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="KnockbackTimer" type="Timer" parent="."]
+wait_time = 0.1
 one_shot = true

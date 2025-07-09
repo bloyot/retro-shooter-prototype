@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dx5xxdrssglcc"]
+[gd_scene load_steps=14 format=3 uid="uid://dx5xxdrssglcc"]
 
 [ext_resource type="Material" uid="uid://l4fbkg5jukc6" path="res://assets/environment/prototype/materials/dark.tres" id="1_48k1e"]
 [ext_resource type="PackedScene" uid="uid://ch07gx0ie5as5" path="res://scenes/game.tscn" id="1_cakon"]
@@ -11,6 +11,7 @@
 [ext_resource type="Material" uid="uid://c4dbbwcon6wei" path="res://assets/environment/prototype/materials/green.tres" id="7_6l3um"]
 [ext_resource type="PackedScene" uid="uid://d1vu566ab3bff" path="res://scenes/killbox.tscn" id="7_wcg33"]
 [ext_resource type="PackedScene" uid="uid://dstb5bwp58aet" path="res://scenes/enemy/enemy.tscn" id="11_tyclf"]
+[ext_resource type="Resource" uid="uid://dn521evqbbyld" path="res://scripts/enemy/resources/ranged_enemy.tres" id="12_ycaat"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fy36x"]
 albedo_texture = ExtResource("4_ro36h")
@@ -147,5 +148,9 @@ size = Vector3(200, 1, 200)
 
 [node name="Enemy" parent="Enemies" groups=["enemy"] instance=ExtResource("11_tyclf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.458215, -4.54451)
+
+[node name="Ranged" parent="Enemies" groups=["enemy"] instance=ExtResource("11_tyclf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.39071, 0.458215, -4.54451)
+enemy_resource = ExtResource("12_ycaat")
 
 [editable path="Environment"]

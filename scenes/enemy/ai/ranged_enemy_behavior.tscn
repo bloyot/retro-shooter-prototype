@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvd4gwxdwl2vo"]
+
+[ext_resource type="Script" uid="uid://rgscygrk2621" path="res://addons/beehave/nodes/beehave_tree.gd" id="1_ei443"]
+[ext_resource type="Script" uid="uid://c63wvojklmyo3" path="res://addons/beehave/nodes/composites/sequence.gd" id="2_w2ewp"]
+[ext_resource type="Script" uid="uid://81rgmk3s6o66" path="res://scripts/enemy/ai/conditions/within_shooting_range.gd" id="3_0qsfy"]
+[ext_resource type="Script" uid="uid://bime36f0sqg57" path="res://scripts/enemy/ai/actions/shoot.gd" id="4_8jdd8"]
+
+[node name="RangedEnemyBehavior" type="Node" node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("1_ei443")
+blackboard = NodePath("@Node@21810")
+actor = NodePath("")
+
+[node name="SequenceComposite" type="Node" parent="."]
+script = ExtResource("2_w2ewp")
+
+[node name="WithinShootingRange" type="Node" parent="SequenceComposite"]
+script = ExtResource("3_0qsfy")
+
+[node name="Shoot" type="Node" parent="SequenceComposite"]
+script = ExtResource("4_8jdd8")

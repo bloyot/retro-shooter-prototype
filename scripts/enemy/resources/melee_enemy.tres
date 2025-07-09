@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyResource" load_steps=3 format=3 uid="uid://dl6u0k3r7ne1s"]
+
+[ext_resource type="PackedScene" uid="uid://dyssawwjldcik" path="res://scenes/enemy/ai/melee_enemy_behavior.tscn" id="1_4cysk"]
+[ext_resource type="Script" uid="uid://d2i1v56i8484k" path="res://scripts/enemy/enemy_resource.gd" id="1_x1jry"]
+
+[resource]
+script = ExtResource("1_x1jry")
+health = 100.0
+move_speed = 1.0
+melee_damage = 15.0
+aggro_range = 50.0
+type = 0
+behavior = ExtResource("1_4cysk")
+shooting_range = 0.0
+projectile_speed = 0.0

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b1aiulvr0kd1b"]
 
 [ext_resource type="Texture2D" uid="uid://6gqv235qu2bl" path="res://assets/sprites/debug_sprite.png" id="1_r34ci"]
-[ext_resource type="Script" path="res://scripts/weapons/hit_decal.gd" id="1_twaxn"]
+[ext_resource type="Script" uid="uid://dfvdpv3luiarb" path="res://scripts/weapons/hit_decal.gd" id="1_twaxn"]
 
 [node name="HitDecal" type="Sprite3D"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.00122118, 0.00379145, -0.00151324)

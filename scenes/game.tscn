@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://ch07gx0ie5as5"]
 
-[ext_resource type="Script" path="res://scripts/game.gd" id="1_5mv68"]
+[ext_resource type="Script" uid="uid://6gvk2ydnsk70" path="res://scripts/game.gd" id="1_5mv68"]
 [ext_resource type="PackedScene" uid="uid://drb600rubyjf6" path="res://scenes/player.tscn" id="2_77n2k"]
 [ext_resource type="PackedScene" uid="uid://cqbi4k1e3r2ad" path="res://scenes/ui/HUD.tscn" id="3_s5xoy"]
-[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="4_cq2sy"]
+[ext_resource type="Script" uid="uid://cy41xjrc86g57" path="res://scripts/ui/hud.gd" id="4_cq2sy"]
 
 [node name="Game" type="Node3D" groups=["game"]]
 script = ExtResource("1_5mv68")

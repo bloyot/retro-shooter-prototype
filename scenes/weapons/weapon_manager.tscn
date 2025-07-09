@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cub7k8udl6uuu"]
 
-[ext_resource type="Script" path="res://scripts/weapons/weapon_manager.gd" id="1_fh6fk"]
+[ext_resource type="Script" uid="uid://dg6pfbytmmhlq" path="res://scripts/weapons/weapon_manager.gd" id="1_fh6fk"]
 [ext_resource type="PackedScene" uid="uid://caaxinbb0lrvg" path="res://scenes/weapons/machine_gun.tscn" id="2_jaydk"]
 [ext_resource type="PackedScene" uid="uid://cxt7ra5x1j7j5" path="res://scenes/weapons/sniper.tscn" id="3_jl323"]
 [ext_resource type="PackedScene" uid="uid://bmw5t0uk7twca" path="res://scenes/weapons/rocket_launcher.tscn" id="4_ykqiq"]

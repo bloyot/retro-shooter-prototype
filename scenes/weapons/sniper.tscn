@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cxt7ra5x1j7j5"]
 
 [ext_resource type="PackedScene" uid="uid://baam70oiqilp1" path="res://assets/models/weapons/sniper_model.glb" id="1_t50vf"]
-[ext_resource type="Script" path="res://scripts/weapons/weapon.gd" id="2_tic1j"]
+[ext_resource type="Script" uid="uid://gevlurjkv21u" path="res://scripts/weapons/weapon.gd" id="2_tic1j"]
 [ext_resource type="Resource" uid="uid://c8op646fs6cqd" path="res://scripts/weapons/resources/sniper.tres" id="3_12853"]
 
 [node name="Sniper" groups=["player"] instance=ExtResource("1_t50vf")]

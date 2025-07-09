@@ -1,9 +1,17 @@
-[gd_resource type="Resource" script_class="EnemyResource" load_steps=2 format=3 uid="uid://dn521evqbbyld"]
+[gd_resource type="Resource" script_class="EnemyResource" load_steps=4 format=3 uid="uid://dn521evqbbyld"]
 
-[ext_resource type="Script" path="res://scripts/enemy/enemy_resource.gd" id="1_226ku"]
+[ext_resource type="Script" uid="uid://d2i1v56i8484k" path="res://scripts/enemy/enemy_resource.gd" id="1_226ku"]
+[ext_resource type="PackedScene" uid="uid://cvd4gwxdwl2vo" path="res://scenes/enemy/ai/ranged_enemy_behavior.tscn" id="1_mddga"]
+[ext_resource type="PackedScene" uid="uid://bbjxx2uatajhb" path="res://scenes/weapons/projectiles/bullet.tscn" id="1_qnvxl"]
 
 [resource]
 script = ExtResource("1_226ku")
 health = 100.0
 move_speed = 10.0
 melee_damage = 15.0
+aggro_range = 0.0
+type = 1
+behavior = ExtResource("1_mddga")
+shooting_range = 50.0
+projectile_speed = 10.0
+projectile_scene = ExtResource("1_qnvxl")
